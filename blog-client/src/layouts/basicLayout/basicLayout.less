@@ -1,0 +1,28 @@
+.basic-layout {
+  height: 100vh;
+  overflow: hidden;
+
+  .ant-layout-header {
+    background: #001529;
+    padding: 0 30px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .ant-layout-content {
+    padding: 0 15px 15px;
+    overflow: hidden;
+    position: relative;
+
+    .ant-breadcrumb {
+      line-height: 40px;
+    }
+
+    .page-content {
+      width: 100%;
+      height: calc(100% - 40px);
+      background: #fff;
+      overflow: auto;
+    }
+  }
+}

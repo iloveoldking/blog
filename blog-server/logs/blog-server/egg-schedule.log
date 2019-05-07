@@ -1,0 +1,24 @@
+2019-04-23 12:20:07,147 INFO 7772 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 41992855ms at 2019-04-24 00:00:00.002
+2019-04-23 12:20:07,148 INFO 7772 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 41993853ms at 2019-04-24 00:00:01.001
+2019-04-23 12:20:07,039 INFO 1272 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 12:20:07,039 INFO 1272 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 12:20:31,226 INFO 9588 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 12:20:31,226 INFO 9588 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 13:20:36,132 INFO 8616 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 13:20:36,132 INFO 8616 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 14:47:46,553 INFO 3104 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 14:47:46,553 INFO 3104 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 14:47:46,970 INFO 6388 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 33133032ms at 2019-04-24 00:00:00.002
+2019-04-23 14:47:46,970 INFO 6388 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 33134030ms at 2019-04-24 00:00:01.000
+2019-04-23 15:30:31,904 INFO 7552 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 30568098ms at 2019-04-24 00:00:00.002
+2019-04-23 15:30:31,904 INFO 7552 [Timer] E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 30569096ms at 2019-04-24 00:00:01.000
+2019-04-23 15:30:31,371 INFO 2512 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 15:30:31,371 INFO 2512 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 15:40:00,317 INFO 7592 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 15:40:00,317 INFO 7592 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 15:40:02,378 INFO 3748 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 15:40:02,378 INFO 3748 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 15:41:15,308 INFO 10512 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 15:41:15,308 INFO 10512 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js
+2019-04-23 15:41:17,650 INFO 8340 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\clean_log.js
+2019-04-23 15:41:17,650 INFO 8340 [egg-schedule]: register schedule E:\project-code\self-project\blog\blog-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js

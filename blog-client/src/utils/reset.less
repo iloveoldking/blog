@@ -1,0 +1,43 @@
+// 覆盖 antd.less 里的变量
+@import "~ant-design-vue/dist/antd.less";
+@primary-color: #00bfc1;
+
+// 辅助工具
+.cl {
+  &:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    font-size: 0;
+  }
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+// 重置样式
+body,
+html {
+  .full-size;
+  overflow: hidden;
+}
+
+#app {
+  .full-size;
+  overflow: auto;
+}
+
+// 浏览器滚动条样式，只在chrome上生效
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: #bbb;
+}
