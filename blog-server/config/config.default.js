@@ -21,8 +21,22 @@ module.exports = appInfo => {
   config.mongoose = {
     client: {
       url: 'mongodb://127.0.0.1/blog',
-      options: {},
+      options: {
+        // autoIndex: false 
+      },
     },
+  };
+
+  config.security= {
+    csrf: {
+      enable: false
+    }
+  }
+
+  config.cors = {
+    origin:'*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    credentials: true
   };
 
   // add your user config here

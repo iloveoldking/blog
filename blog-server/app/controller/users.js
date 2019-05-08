@@ -3,14 +3,28 @@
 const Controller = require('egg').Controller;
 
 class UsersController extends Controller {
-  async index() {
+  async create() {
     const {
       ctx,
     } = this;
-    ctx.body = await ctx.model.User.create({
-      userName: 'admin',
-      password: '123',
-    });
+    const {
+      account,
+      nickName,
+      mobile,
+    } = ctx.request.body;
+    const res = await ctx.service.user.create({
+      account,
+      nickName,
+      mobile,
+    })
+    console.log(res)
+    ctx.body = res;
+  }
+  async find() {
+    const {
+      ctx,
+    } = this;
+    ctx.body = await ctx.service.user.find();
   }
 }
 

@@ -14,3 +14,7 @@
 
 # idea
 .vscode
+
+# egg
+/logs
+/run
