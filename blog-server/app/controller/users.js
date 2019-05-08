@@ -17,7 +17,6 @@ class UsersController extends Controller {
       nickName,
       mobile,
     })
-    console.log(res)
     ctx.body = res;
   }
   async find() {
