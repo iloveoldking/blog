@@ -1,7 +1,7 @@
 {
-  "name": "ant-design-pro",
+  "name": "blog-manage",
   "version": "2.1.1",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "博客管理后台",
   "private": true,
   "scripts": {
     "start": "cross-env MOCK=none umi dev",
