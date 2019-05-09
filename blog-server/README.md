@@ -16,3 +16,8 @@
 + Model.replaceOne()
 + Model.updateMany()
 + Model.updateOne()
+
+
+
+skip
+limit
