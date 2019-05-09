@@ -1,23 +1,18 @@
 <template>
   <view>
-    index
+    center
   </view>
 </template>
 
 <script>
-  import request from '../../static/utils/request.js'
   export default {
     config: {
-      navigationBarTitleText: '首页'
+      navigationBarTitleText: '中心'
     },
     data: {
-      articleList: []
+      
     },
-    onLoad() {
-      request('/article/findAll', {}, function (res) {
-        console.log(res);
-      })
-    }
+    
   }
 </script>
 

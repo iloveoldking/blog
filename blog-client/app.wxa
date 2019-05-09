@@ -1,41 +1,47 @@
 <template>
-  <view>
-    <page></page>
-  </view>
+  <page></page>
 </template>
 
 <script>
   import system from './static/utils/system'
   export default {
     config: {
-      usingComponents: {
+      usingComponents: {},
+      pages: ['pages/home/index', 'pages/user/center'],
+      tabBar: {
+        list: [{
+            pagePath: 'pages/home/index',
+            text: 'index'
+          },
+          {
+            pagePath: 'pages/user/center',
+            text: 'center'
+          }
+        ]
       },
-      pages: [
-        'pages/home/index'
-      ],
       window: {
-        backgroundTextStyle: 'dark',
+        backgroundTextStyle: 'light',
         backgroundColor: '#efefef',
-        navigationBarBackgroundColor: '#ffffff',
-        navigationBarTitleText: 'TouchUI',
-        navigationBarTextStyle: 'black'
+        navigationBarBackgroundColor: '#5dc2af',
+        navigationBarTitleText: 'blog',
+        navigationBarTextStyle: 'white'
       },
       networkTimeout: {
-        request: 10000
+        request: 10 * 1000
       },
       theme: {
-        'theme-color': '#39f'
+        'theme-color': '#5dc2af'
       }
     },
-    globalData: { },
-    onLaunch () { 
+    globalData: {},
+    onLaunch() {
       system.attachInfo()
     },
-    onShow () { },
-    onHide () { }
+    onShow() {},
+    onHide() {}
   }
 </script>
 
 <style lang="less">
-@import './static/styles/index.less';
+  @import './static/styles/index.less';
 </style>

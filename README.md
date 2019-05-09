@@ -7,4 +7,4 @@
 >以react作为核心技术，umi作为核心框架，ant-design作为ui框架
 
 ## 客户前端 blog-client
->使用微信小程序开发，选用TouchWX开发
+>使用微信小程序开发，选用TouchWX开发（暂停此工程，因为小程序只支持https协议，目前开发的http服务无法使用）
