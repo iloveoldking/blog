@@ -8,22 +8,72 @@ class UsersController extends Controller {
       ctx,
     } = this;
     const {
-      account,
-      nickName,
       mobile,
+      password,
+      nickname
     } = ctx.request.body;
-    const res = await ctx.service.user.create({
-      account,
-      nickName,
-      mobile,
-    })
+    const res = await ctx.service.user.create(mobile, password, nickname)
     ctx.body = res;
   }
-  async find() {
+
+  async delete() {
     const {
       ctx,
     } = this;
-    ctx.body = await ctx.service.user.find();
+    const {
+      userIds
+    } = ctx.request.body;
+    const res = await ctx.service.user.delete(userIds);
+    ctx.body = res;
+  }
+
+  async update() {
+    const {
+      ctx,
+    } = this;
+    const {
+      userId,
+      password
+    } = ctx.request.body;
+    const res = await ctx.service.user.update(userId, password);
+    ctx.body = res;
+  }
+
+  async findAll() {
+    const {
+      ctx,
+    } = this;
+    const {
+      pageNum,
+      pageSize,
+      mobile,
+      nickname
+    } = ctx.request.body;
+    const res = await ctx.service.user.findAll(pageNum, pageSize, mobile, nickname);
+    ctx.body = res;
+  }
+
+  async findById() {
+    const {
+      ctx,
+    } = this;
+    const {
+      id
+    } = ctx.request.body;
+    const res = await ctx.service.user.findById(id);
+    ctx.body = res;
+  }
+
+  async login() {
+    const {
+      ctx,
+    } = this;
+    const {
+      account,
+      password
+    } = ctx.request.body;
+    const res = await ctx.service.user.login(account, password);
+    ctx.body = res;
   }
 }
 

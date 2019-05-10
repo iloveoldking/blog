@@ -14,19 +14,17 @@ module.exports = app => {
   }
 
   const schemaFields = {
-    account: {
+    mobile: {
       type: String,
       unique: true
     },
-    nickName: {
-      type: String,
+    password: {
+      type: String
     },
-    mobile: {
+    nickname: {
       type: String,
     }
   }
-
   const UserSchema = new Schema(schemaFields, schemaConfig);
-  UserSchema.set('toObject', { virtuals: true })
   return mongoose.model('User', UserSchema);
 };

@@ -4,7 +4,8 @@ const {
   paramsAbsenceError,
   dataAbsenceError,
   operateError,
-  batchOperateError
+  batchOperateError,
+  paramsValueError
 } = require('../utils/createResponse');
 const {
   isEmptyArray
@@ -38,7 +39,7 @@ class ArticleService extends Service {
 
   /**
    * @description 批量删除文章
-   * @param {String} articleIds 文章id数组
+   * @param {Array} articleIds 文章id数组
    */
   async delete(articleIds) {
     const {
@@ -66,7 +67,7 @@ class ArticleService extends Service {
         })
       }
     } catch (error) {
-      return operateError('数据库操作失败，articleIds中存在错误数据')
+      return paramsValueError('articleIds')
     }
   }
 
@@ -119,7 +120,7 @@ class ArticleService extends Service {
         return dataAbsenceError();
       }
     } catch (error) {
-      return operateError('数据库操作失败，id存在错误')
+      return paramsValueError('id')
     }
   }
 }

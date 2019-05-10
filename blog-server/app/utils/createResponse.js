@@ -34,4 +34,25 @@ module.exports = {
       data
     }
   },
+  // 参数有误
+  paramsValueError(field) {
+    return {
+      status: 400005,
+      msg: `参数${field}错误`
+    }
+  },
+  // 数据唯一性
+  dataConfictError(msg) {
+    return {
+      status: 400006,
+      msg
+    }
+  },
+  // 登录验证失败
+  loginError() {
+    return {
+      status: 400007,
+      msg: '帐号或密码错误'
+    }
+  },
 }
