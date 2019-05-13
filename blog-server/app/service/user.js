@@ -44,11 +44,12 @@ class UserService extends Service {
     })
     if (nicknameExist) return dataConfictError('用户名已被注册')
 
-    const user = await ctx.model.User.create({
+    let user = await ctx.model.User.create({
       mobile,
       password,
       nickname
     });
+    user = user.toObject();
     return successResponse({
       data: user
     });
@@ -133,7 +134,7 @@ class UserService extends Service {
       mobile: new RegExp(`${mobile}`, "i"),
       nickname: new RegExp(`${nickname}`, "i")
     };
-    const users = await ctx.model.User.find(query, null, {
+    const users = await ctx.model.User.find(query, 'mobile nickname createdTime updatedTime', {
       skip: (pageNum - 1) * pageSize,
       limit: pageSize
     })
@@ -158,7 +159,7 @@ class UserService extends Service {
     } = this;
     if (!id) return paramsAbsenceError('id')
     try {
-      const user = await ctx.model.User.findById(id);
+      const user = await ctx.model.User.findById(id, 'mobile nickname createdTime updatedTime');
       if (user) {
         return successResponse({
           data: user
@@ -185,7 +186,7 @@ class UserService extends Service {
     const user = await ctx.model.User.findOne({
       mobile: account,
       password
-    },'mobile nickname createdTime updatedTime');
+    }, 'mobile nickname createdTime updatedTime');
     if (user) {
       return successResponse({
         data: user

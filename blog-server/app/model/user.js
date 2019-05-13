@@ -1,4 +1,5 @@
 'use strict';
+const moment = require('moment')
 
 module.exports = app => {
   const mongoose = app.mongoose;
@@ -10,6 +11,13 @@ module.exports = app => {
     timestamps: {
       createdAt: 'createdTime',
       updatedAt: 'updatedTime'
+    },
+    toObject: {
+      transform(doc, ret, options) {
+        delete ret.password;
+        ret.createdTime = moment(ret.createdTime).format('YYYY-MM-DD hh:mm:ss')
+        ret.updatedTime = moment(ret.updatedTime).format('YYYY-MM-DD hh:mm:ss')
+      }
     }
   }
 
