@@ -1,4 +1,5 @@
 const Service = require('egg').Service;
+const moment = require('moment')
 const {
   successResponse,
   paramsAbsenceError,
@@ -134,11 +135,17 @@ class UserService extends Service {
       mobile: new RegExp(`${mobile}`, "i"),
       nickname: new RegExp(`${nickname}`, "i")
     };
-    const users = await ctx.model.User.find(query, 'mobile nickname createdTime updatedTime', {
+    let users = await ctx.model.User.find(query, 'mobile nickname createdAt updatedAt', {
       skip: (pageNum - 1) * pageSize,
-      limit: pageSize
+      limit: pageSize,
+      sort: '-createdAt',
+      lean: true,
+    });
+    users.forEach(item => {
+      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD hh:mm:ss')
+      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD hh:mm:ss')
     })
-    const total = await ctx.model.User.count(query);
+    const total = await ctx.model.User.countDocuments(query);
     return successResponse({
       data: {
         list: users,
@@ -159,10 +166,10 @@ class UserService extends Service {
     } = this;
     if (!id) return paramsAbsenceError('id')
     try {
-      const user = await ctx.model.User.findById(id, 'mobile nickname createdTime updatedTime');
+      const user = await ctx.model.User.findById(id, 'mobile nickname createdAt updatedAt');
       if (user) {
         return successResponse({
-          data: user
+          data: user.toObject()
         })
       } else {
         return dataAbsenceError();
@@ -186,10 +193,10 @@ class UserService extends Service {
     const user = await ctx.model.User.findOne({
       mobile: account,
       password
-    }, 'mobile nickname createdTime updatedTime');
+    }, 'mobile nickname createdAt updatedAt');
     if (user) {
       return successResponse({
-        data: user
+        data: user.toObject()
       })
     } else {
       return loginError();

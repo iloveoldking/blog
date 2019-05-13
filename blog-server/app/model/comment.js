@@ -14,8 +14,7 @@ module.exports = app => {
 
   const schemaFields = {
     userId: {
-      type: String,
-      unique: true
+      type: String
     },
     articleId: {
       type: String,

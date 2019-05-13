@@ -6,31 +6,26 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const schemaConfig = {
-    minimize: false,
     versionKey: false,
-    timestamps: {
-      createdAt: 'createdTime',
-      updatedAt: 'updatedTime'
-    },
+    timestamps: true,
     toObject: {
       transform(doc, ret, options) {
         delete ret.password;
-        ret.createdTime = moment(ret.createdTime).format('YYYY-MM-DD hh:mm:ss')
-        ret.updatedTime = moment(ret.updatedTime).format('YYYY-MM-DD hh:mm:ss')
+        ret.createdAt = moment(ret.createdAt).format('YYYY-MM-DD hh:mm:ss')
+        ret.updatedAt = moment(ret.updatedAt).format('YYYY-MM-DD hh:mm:ss')
       }
     }
   }
 
   const schemaFields = {
     mobile: {
-      type: String,
-      unique: true
+      type: String
     },
     password: {
       type: String
     },
     nickname: {
-      type: String,
+      type: String
     }
   }
   const UserSchema = new Schema(schemaFields, schemaConfig);
