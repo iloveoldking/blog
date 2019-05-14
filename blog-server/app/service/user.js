@@ -23,8 +23,9 @@ class UserService extends Service {
    * @param {*} mobile 手机号 唯一
    * @param {*} password 密码 6-20位数字字母
    * @param {*} nickname 昵称 唯一
+   * @param {*} photo 头像
    */
-  async create(mobile, password, nickname) {
+  async create(mobile, password, nickname, photo) {
     const {
       ctx,
     } = this;
@@ -44,12 +45,13 @@ class UserService extends Service {
       nickname
     })
     if (nicknameExist) return dataConfictError('用户名已被注册')
-
-    let user = await ctx.model.User.create({
+    let createParams = {
       mobile,
       password,
       nickname
-    });
+    };
+    if (photo) createParams.photo = photo;
+    let user = await ctx.model.User.create(createParams);
     user = user.toObject();
     return successResponse({
       data: user

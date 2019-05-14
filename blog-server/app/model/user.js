@@ -26,6 +26,9 @@ module.exports = app => {
     },
     nickname: {
       type: String
+    },
+    photo: {
+      type: String
     }
   }
   const UserSchema = new Schema(schemaFields, schemaConfig);

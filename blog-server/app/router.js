@@ -19,4 +19,7 @@ module.exports = app => {
   router.post('/article/delete', controller.articles.delete);
   router.post('/article/findAll', controller.articles.findAll);
   router.post('/article/findById', controller.articles.findById);
+
+  // 上传文件
+  router.post('/upload',controller.upload.index);
 };

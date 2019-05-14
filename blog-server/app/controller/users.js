@@ -10,9 +10,10 @@ class UsersController extends Controller {
     const {
       mobile,
       password,
-      nickname
+      nickname,
+      photo
     } = ctx.request.body;
-    const res = await ctx.service.user.create(mobile, password, nickname)
+    const res = await ctx.service.user.create(mobile, password, nickname, photo)
     ctx.body = res;
   }
 

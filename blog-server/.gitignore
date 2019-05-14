@@ -18,3 +18,7 @@
 # egg
 /logs
 /run
+
+
+# upload
+/app/public/uploads
