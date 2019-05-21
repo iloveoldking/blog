@@ -24,3 +24,5 @@
 /app/public/uploads/*
 
 package-lock.json
+
+typings/
