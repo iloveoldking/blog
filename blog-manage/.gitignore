@@ -35,3 +35,5 @@ functions/mock
 # screenshot
 screenshot
 .firebase
+
+package-lock.json
