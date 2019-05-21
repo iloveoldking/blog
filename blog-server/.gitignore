@@ -21,6 +21,6 @@
 
 
 # upload
-/app/public/uploads
+/app/public/uploads/*
 
 package-lock.json

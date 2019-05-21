@@ -137,7 +137,7 @@ class UserService extends Service {
       mobile: new RegExp(`${mobile}`, "i"),
       nickname: new RegExp(`${nickname}`, "i")
     };
-    let users = await ctx.model.User.find(query, 'mobile nickname createdAt updatedAt', {
+    let users = await ctx.model.User.find(query, 'mobile nickname photo createdAt updatedAt', {
       skip: (pageNum - 1) * pageSize,
       limit: pageSize,
       sort: '-createdAt',
@@ -168,7 +168,7 @@ class UserService extends Service {
     } = this;
     if (!id) return paramsAbsenceError('id')
     try {
-      const user = await ctx.model.User.findById(id, 'mobile nickname createdAt updatedAt');
+      const user = await ctx.model.User.findById(id, 'mobile nickname photo createdAt updatedAt');
       if (user) {
         return successResponse({
           data: user.toObject()
@@ -195,7 +195,7 @@ class UserService extends Service {
     const user = await ctx.model.User.findOne({
       mobile: account,
       password
-    }, 'mobile nickname createdAt updatedAt');
+    }, 'mobile nickname photo createdAt updatedAt');
     if (user) {
       return successResponse({
         data: user.toObject()
