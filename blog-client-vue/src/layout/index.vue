@@ -1,6 +1,7 @@
 <template>
   <a-layout class='blog-layout'>
     <layout-head></layout-head>
+    
     <a-layout-content class='blog-layout-content'>
       <router-view></router-view>
     </a-layout-content>
