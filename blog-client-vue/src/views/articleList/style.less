@@ -1,0 +1,30 @@
+.article-list-container {
+  padding: 10px 100px;
+
+  .ant-list-vertical {
+    .ant-list-item-meta {
+      margin-bottom: 10px;
+    }
+
+    .ant-list-item-content {
+      text-indent: 2em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .ant-list-item-action {
+      text-align: right;
+
+      li:nth-of-type(4) {
+        cursor: text;
+      }
+    }
+  }
+
+  .more-btn {
+    margin-top: 20px;
+  }
+}

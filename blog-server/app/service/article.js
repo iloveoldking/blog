@@ -1,4 +1,8 @@
+// TODO
+// 文章支持付文本编辑，接口筛选出文本中的图片用作前台展示
+
 const Service = require('egg').Service;
+const moment = require('moment')
 const {
   successResponse,
   paramsAbsenceError,
@@ -27,13 +31,12 @@ class ArticleService extends Service {
     if (!title) return paramsAbsenceError('title')
     if (!content) return paramsAbsenceError('content')
     const article = await ctx.model.Article.create({
-      userId,
+      user: userId,
       title,
-      content,
-      commentCount: 0
+      content
     })
     return successResponse({
-      data: article
+      data: article.toObject()
     })
   }
 
@@ -81,16 +84,27 @@ class ArticleService extends Service {
     const {
       ctx,
     } = this;
+    const Article = ctx.model.Article;
     pageNum = parseInt(pageNum);
     pageSize = parseInt(pageSize);
     const query = {
       title: new RegExp(`${title}`, "i")
     };
-    const articles = await ctx.model.Article.find(query, null, {
+    const articles = await Article.find(query, null, {
       skip: (pageNum - 1) * pageSize,
-      limit: pageSize
+      limit: pageSize,
+      sort: '-createdAt',
+      lean: true,
     })
-    const total = await ctx.model.Article.count(query);
+    Article.populate(articles, {
+      path: 'user',
+      select: 'nickname photo'
+    })
+    articles.forEach(item => {
+      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD hh:mm:ss')
+      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD hh:mm:ss')
+    })
+    const total = await Article.countDocuments(query);
     return successResponse({
       data: {
         list: articles,
@@ -114,7 +128,7 @@ class ArticleService extends Service {
       const article = await ctx.model.Article.findById(id);
       if (article) {
         return successResponse({
-          data: article
+          data: article.toObject()
         })
       } else {
         return dataAbsenceError();

@@ -1,0 +1,30 @@
+// 覆盖 antd.less 里的变量
+@import "~ant-design-vue/dist/antd.less";
+
+// 辅助工具
+.cl {
+  &:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    font-size: 0;
+  }
+}
+
+html,
+body {
+  min-width: 800px;
+}
+
+// 浏览器滚动条样式，只在chrome上生效
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: #666;
+}

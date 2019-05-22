@@ -1,21 +1,25 @@
 'use strict';
+const moment = require('moment')
 
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
 
   const schemaConfig = {
-    minimize: false,
     versionKey: false,
-    timestamps: {
-      createdAt: 'createdTime',
-      updatedAt: 'updatedTime'
+    timestamps: true,
+    toObject: {
+      transform(doc, ret, options) {
+        ret.createdAt = moment(ret.createdAt).format('YYYY-MM-DD hh:mm:ss')
+        ret.updatedAt = moment(ret.updatedAt).format('YYYY-MM-DD hh:mm:ss')
+      }
     }
   }
 
   const schemaFields = {
-    userId: {
-      type: String
+    user: {
+      type: Schema.ObjectId,
+      ref: 'User'
     },
     title: {
       type: String,
@@ -23,8 +27,17 @@ module.exports = app => {
     content: {
       type: String,
     },
+    collectCount: {
+      type: Number,
+      default: 0
+    },
+    likeCount: {
+      type: Number,
+      default: 0
+    },
     commentCount: {
       type: Number,
+      default: 0
     }
   }
 
