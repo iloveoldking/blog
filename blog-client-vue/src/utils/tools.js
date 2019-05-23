@@ -134,7 +134,7 @@ export const hasKey = (obj, key) => {
  * @description 判断请求返回的状态码是否是正确码
  */
 export const isCorrect = (res) => {
-  if (res && (res.statusCode === userConfig.successStatusCode)) {
+  if (res && (res.status === userConfig.successStatusCode)) {
     return true;
   } else {
     return false;
@@ -150,6 +150,17 @@ export const logout = () => {
 }
 
 /**
+ * @description 设置sessionStorage
+ */
+export const setSessionStorage = (item, value = null) => {
+  if (!value) {
+    sessionStorage.removeItem(item);
+  } else {
+    sessionStorage.setItem(item, JSON.stringify(value));
+  }
+}
+
+/**
  * @description 获取sessionStorage
  */
 export const getSessionStorage = (item) => {
@@ -162,4 +173,15 @@ export const getSessionStorage = (item) => {
   } else {
     return false;
   }
+}
+
+/**
+ * @param {File} img 图片文件
+ *  @param {Function} callback 回调事件
+ * @description 获取图片base数据
+ */
+export const getBase64 = (img, callback) => {
+  const reader = new FileReader()
+  reader.addEventListener('load', () => callback(reader.result))
+  reader.readAsDataURL(img)
 }

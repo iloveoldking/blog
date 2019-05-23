@@ -1,6 +1,13 @@
 import {
-  getArticleList
+  getArticleList,
+  submitArticle
 } from '../../services/article';
+import {
+  message
+} from 'ant-design-vue';
+import {
+  isCorrect
+} from '@/utils/tools';
 
 export default {
   namespaced: true,
@@ -22,6 +29,18 @@ export default {
         list
       } = res.data;
       commit('setDataList', list);
+    },
+    async submitArticle({
+      commit,
+      state
+    }, params) {
+      const res = await submitArticle(params);
+      if (isCorrect(res)) {
+        return true;
+      } else {
+        message.error(res.msg);
+        return false;
+      }
     }
   }
 }

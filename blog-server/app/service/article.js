@@ -1,5 +1,4 @@
-// TODO
-// 文章支持付文本编辑，接口筛选出文本中的图片用作前台展示
+// TODO 文章支持付文本编辑，接口筛选出文本中的图片用作前台展示
 
 const Service = require('egg').Service;
 const moment = require('moment')
@@ -101,8 +100,8 @@ class ArticleService extends Service {
       select: 'nickname photo'
     })
     articles.forEach(item => {
-      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD hh:mm:ss')
-      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD hh:mm:ss')
+      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')
+      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD HH:mm:ss')
     })
     const total = await Article.countDocuments(query);
     return successResponse({

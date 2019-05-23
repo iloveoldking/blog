@@ -19,9 +19,9 @@
         </template>
         <a-list-item-meta>
           <router-link slot="title" :to="'/articleDetail?id='+item._id">{{item.title}}</router-link>
-          <a-avatar slot="avatar" :src="item.user.photo | photoAddress" />
+          <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | photoAddress" />
+          <a-avatar v-else slot="avatar">{{item.user.nickname | sliceOne}}</a-avatar>
         </a-list-item-meta>
-        {{item.content}}
       </a-list-item>
     </a-list>
     <!-- TODO 增加分页加载功能 -->

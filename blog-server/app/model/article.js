@@ -10,8 +10,8 @@ module.exports = app => {
     timestamps: true,
     toObject: {
       transform(doc, ret, options) {
-        ret.createdAt = moment(ret.createdAt).format('YYYY-MM-DD hh:mm:ss')
-        ret.updatedAt = moment(ret.updatedAt).format('YYYY-MM-DD hh:mm:ss')
+        ret.createdAt = moment(ret.createdAt).format('YYYY-MM-DD HH:mm:ss')
+        ret.updatedAt = moment(ret.updatedAt).format('YYYY-MM-DD HH:mm:ss')
       }
     }
   }

@@ -52,7 +52,7 @@ module.exports = {
   loginError() {
     return {
       status: 400007,
-      msg: '帐号或密码错误'
+      msg: '手机号或密码错误'
     }
   },
 }

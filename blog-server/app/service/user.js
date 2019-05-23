@@ -144,8 +144,8 @@ class UserService extends Service {
       lean: true,
     });
     users.forEach(item => {
-      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD hh:mm:ss')
-      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD hh:mm:ss')
+      item.createdAt = moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')
+      item.updatedAt = moment(item.updatedAt).format('YYYY-MM-DD HH:mm:ss')
     })
     const total = await ctx.model.User.countDocuments(query);
     return successResponse({
@@ -183,17 +183,17 @@ class UserService extends Service {
 
   /**
    * @description 用户登录
-   * @param {String} account 帐号
+   * @param {String} mobile 手机号
    * @param {String} password 密码
    */
-  async login(account, password) {
+  async login(mobile, password) {
     const {
       ctx,
     } = this;
-    if (!account) return paramsAbsenceError('account')
+    if (!mobile) return paramsAbsenceError('mobile')
     if (!password) return paramsAbsenceError('password')
     const user = await ctx.model.User.findOne({
-      mobile: account,
+      mobile,
       password
     }, 'mobile nickname photo createdAt updatedAt');
     if (user) {

@@ -11,7 +11,8 @@ module.exports = async function (_this) {
     ctx
   } = _this;
   const stream = await ctx.getFileStream();
-  const filename = md5(stream.filename) + path.extname(stream.filename).toLocaleLowerCase();
+  const currentTime = new Date().getTime();
+  const filename = md5(stream.filename + currentTime) + path.extname(stream.filename).toLocaleLowerCase();
   const target = path.join(_this.config.baseDir, 'app/public/uploads', filename);
   const writeStream = fs.createWriteStream(target);
   try {

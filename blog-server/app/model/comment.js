@@ -7,9 +7,7 @@ module.exports = app => {
   const schemaConfig = {
     minimize: false,
     versionKey: false,
-    timestamps: {
-      createdAt: 'createdTime'
-    }
+    timestamps: true
   }
 
   const schemaFields = {

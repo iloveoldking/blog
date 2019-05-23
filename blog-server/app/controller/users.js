@@ -70,10 +70,10 @@ class UsersController extends Controller {
       ctx,
     } = this;
     const {
-      account,
+      mobile,
       password
     } = ctx.request.body;
-    const res = await ctx.service.user.login(account, password);
+    const res = await ctx.service.user.login(mobile, password);
     ctx.body = res;
   }
 }
