@@ -107,7 +107,6 @@
       register() {
         this.form.validateFields(async (err, values) => {
           if (!err) {
-            // TODO 这里需要将密码采用md5加密
             values.password = md5(values.password);
             if (this.photoFile) {
               this.uploading = true;

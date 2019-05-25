@@ -26,18 +26,6 @@ module.exports = app => {
     },
     content: {
       type: String,
-    },
-    collectCount: {
-      type: Number,
-      default: 0
-    },
-    likeCount: {
-      type: Number,
-      default: 0
-    },
-    commentCount: {
-      type: Number,
-      default: 0
     }
   }
 

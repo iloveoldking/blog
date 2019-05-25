@@ -7,3 +7,7 @@ export const login = params => {
 export const register = params => {
   return request.post('/user/create', params);
 }
+
+export const findById = params => {
+  return request.post('/user/findById', params);
+}

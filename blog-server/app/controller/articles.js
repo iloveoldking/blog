@@ -34,9 +34,10 @@ class ArticleController extends Controller {
     const {
       pageNum,
       pageSize,
-      title
+      title,
+      userId
     } = ctx.request.body;
-    const res = await ctx.service.article.findAll(pageNum, pageSize, title);
+    const res = await ctx.service.article.findAll(pageNum, pageSize, title, userId);
     ctx.body = res;
   }
 
@@ -45,9 +46,49 @@ class ArticleController extends Controller {
       ctx,
     } = this;
     const {
-      id
+      id,
+      userId
     } = ctx.request.body;
-    const res = await ctx.service.article.findById(id);
+    const res = await ctx.service.article.findById(id, userId);
+    ctx.body = res;
+  }
+
+  async collect() {
+    const {
+      ctx,
+    } = this;
+    const {
+      userId,
+      articleId,
+      collectFlag
+    } = ctx.request.body;
+    const res = await ctx.service.article.collect(userId, articleId, collectFlag);
+    ctx.body = res;
+  }
+
+  async like() {
+    const {
+      ctx,
+    } = this;
+    const {
+      userId,
+      articleId,
+      likeFlag
+    } = ctx.request.body;
+    const res = await ctx.service.article.like(userId, articleId, likeFlag);
+    ctx.body = res;
+  }
+
+  async comment() {
+    const {
+      ctx,
+    } = this;
+    const {
+      userId,
+      articleId,
+      content
+    } = ctx.request.body;
+    const res = await ctx.service.article.comment(userId, articleId, content);
     ctx.body = res;
   }
 }

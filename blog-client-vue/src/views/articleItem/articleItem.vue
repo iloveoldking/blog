@@ -1,28 +1,72 @@
 <template>
   <div class='detail-container'>
+    <!-- 文章内容 -->
     <a-card :title="title" :bordered='false'>
-
       <div slot="extra">
         <span>{{user.createdAt}}</span>
         <a-divider type="vertical" />
         <span>{{user.nickname}}</span>
-        <!-- <a-divider type="vertical" />
-        <a-button type="primary" icon='bars' @click='goToList'></a-button> -->
       </div>
-      {{content}}
+      <div v-html='content'></div>
     </a-card>
-    <a-divider />
+    <!-- 评论 -->
+    <a-divider orientation="left">评论专区</a-divider>
+    <div class='comment-container'>
+      <!-- 发表评论 -->
+      <div class='comment-tools'>
+        <a-comment v-if='userInfo'>
+          <a-avatar v-if='userInfo.photo' slot="avatar" :src="userInfo.photo | completeAddress" alt="" />
+          <a-avatar v-else slot="avatar">{{userInfo.nickname | sliceOne}} </a-avatar>
+          <div slot="content">
+            <a-form :form="form">
+              <a-form-item>
+                <a-textarea :rows="2" v-decorator="commentDecorator"></a-textarea>
+              </a-form-item>
+              <a-form-item class='submit-form-item'>
+                <a-button :loading="submitting" @click="handleSubmit" type="primary">发表评论</a-button>
+              </a-form-item>
+            </a-form>
+          </div>
+        </a-comment>
+      </div>
+      <!--评论列表 -->
+      <a-list class="comment-list" itemLayout="horizontal" :dataSource="commentData" :locale='{emptyText:"暂无任何评论"}'>
+        <div slot="header" v-if='commentData.length > 0'>
+          <a-icon type="message" style='margin-right:10px;' />{{commentData.length}}条评论</div>
+        <a-list-item slot="renderItem" slot-scope="item, index">
+          <a-comment :author="item.user.nickname">
+            <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | completeAddress" alt="" />
+            <a-avatar v-else slot="avatar">{{item.user.nickname | sliceOne}} </a-avatar>
+            <template slot="actions" v-if='userInfo'>
+              <span>回复</span>
+            </template>
+            <p slot="content">{{item.content}}</p>
+            <span slot="datetime">{{index + 1}}楼
+              <a-divider type="vertical" />{{item.createdAt}}</span>
+          </a-comment>
+        </a-list-item>
+      </a-list>
+    </div>
   </div>
 </template>
 
 
 <script>
   import {
-    findArticleById
+    mapState,
+    mapMutations,
+    mapActions
+  } from 'vuex';
+  import {
+    findArticleById,
+    commentArticle
   } from '@/services/article';
   import {
     isCorrect
   } from '@/utils/tools';
+  import {
+    scrollIntoView
+  } from 'scroll-js';
   export default {
     name: 'articleItem',
     data() {
@@ -32,8 +76,26 @@
         user: {
           nickname: ''
         },
-        createdAt: ''
+        createdAt: '',
+        commentData: [],
+        submitting: false,
+        form: this.$form.createForm(this),
+        commentDecorator: [
+          'content',
+          {
+            rules: [{
+              required: true,
+              whitespace: true,
+              message: '请输入评论内容'
+            }]
+          }
+        ]
       }
+    },
+    computed: {
+      ...mapState('user', {
+        userInfo: state => state.userInfo
+      })
     },
     created() {
       this.getItem();
@@ -48,12 +110,42 @@
           this.content = res.data.content;
           this.createdAt = res.data.createdAt;
           this.user = res.data.user;
+          this.commentData = res.data.commentArray;
         } else {
           this.title = '未查询到该文章';
         }
       },
       goToList() {
         this.$router.go(-1);
+      },
+      handleSubmit() {
+        this.form.validateFields(async (err, values) => {
+          if (!err) {
+            this.submitting = true;
+            const res = await commentArticle({
+              ...values,
+              userId: this.userInfo._id,
+              articleId: this.$route.query.id
+            })
+            this.submitting = false;
+            if (isCorrect(res)) {
+              this.$message.success('发表成功');
+              this.form.resetFields();
+              await this.getItem();
+              this.$nextTick(() => {
+                const commentList = document.getElementsByClassName('comment-list')[0];
+                const listItems = commentList.getElementsByClassName('ant-list-item');
+                const lastItem = listItems[listItems.length - 1];
+                scrollIntoView(lastItem, document.body, {
+                  behavior: 'smooth'
+                });
+              })
+            } else {
+              this.$message.error('发表失败');
+            }
+          }
+        });
+
       }
     },
   }

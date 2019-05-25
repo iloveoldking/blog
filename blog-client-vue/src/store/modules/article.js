@@ -1,6 +1,7 @@
 import {
   getArticleList,
-  submitArticle
+  submitArticle,
+  findArticleById
 } from '../../services/article';
 import {
   message
@@ -8,6 +9,9 @@ import {
 import {
   isCorrect
 } from '@/utils/tools';
+import Cookies from 'js-cookie';
+import userConfig from '@/config';
+const userInfoKey = userConfig.userInfoKey;
 
 export default {
   namespaced: true,
@@ -33,11 +37,16 @@ export default {
       commit,
       state
     }, params) {
-      const res = await getArticleList({
+      const userInfo = Cookies.getJSON(userInfoKey);
+      let paramsReal = {
         ...params,
         pageSize: state.pageSize,
         pageNum: state.pageNum
-      });
+      };
+      if (userInfo) {
+        paramsReal.userId = userInfo._id
+      }
+      const res = await getArticleList(paramsReal);
       const {
         list,
         total
@@ -56,6 +65,24 @@ export default {
         message.error(res.msg);
         return false;
       }
+    },
+    async updateCurrentArticle({
+      commit,
+      state
+    }, params) {
+      const userInfo = Cookies.getJSON(userInfoKey);
+      const {
+        index,
+        _id
+      } = params;
+      let paramsReal = {
+        id: _id
+      }
+      if (userInfo) {
+        paramsReal.userId = userInfo._id
+      }
+      const res = await findArticleById(paramsReal);
+      state.dataList.splice(index, 1, res.data)
     }
   }
 }

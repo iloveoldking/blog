@@ -19,6 +19,9 @@ module.exports = app => {
   router.post('/article/delete', controller.articles.delete);
   router.post('/article/findAll', controller.articles.findAll);
   router.post('/article/findById', controller.articles.findById);
+  router.post('/article/collect', controller.articles.collect);
+  router.post('/article/like', controller.articles.like);
+  router.post('/article/comment', controller.articles.comment);
 
   // 上传文件
   router.post('/upload',controller.upload.index);

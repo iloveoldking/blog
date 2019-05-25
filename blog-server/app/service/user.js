@@ -12,8 +12,7 @@ const {
 } = require('../utils/createResponse');
 const {
   isEmptyArray,
-  isCorrectMobile,
-  isCorrectPassword
+  isCorrectMobile
 } = require('../utils/tools');
 
 class UserService extends Service {

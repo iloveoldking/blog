@@ -1,30 +1,48 @@
 .article-list-container {
-  padding: 10px 50px;
+  display: flex;
 
-  .ant-list-vertical {
-    .ant-list-item-meta {
-      margin-bottom: 10px;
+  aside {
+    width: 300px;
+    padding: 10px 20px;
+
+    .blog-create-btn {
+      margin-bottom: 15px;
     }
 
-    .ant-list-item-content {
-      text-indent: 2em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-
-    .ant-list-item-action {
-      text-align: right;
-
-      li:nth-of-type(4) {
-        cursor: text;
-      }
+    .blog-search-input {
+      margin-bottom: 15px;
     }
   }
 
-  .article-page {
-    text-align: right;
+  article {
+    width: calc(100% - 300px);
+    padding: 10px 50px;
+
+    .ant-list-vertical {
+      .ant-list-item-meta {
+        margin-bottom: 10px;
+      }
+
+      .ant-list-item-content {
+        text-indent: 2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .ant-list-item-action {
+        text-align: right;
+
+        li:nth-of-type(4) {
+          cursor: text;
+        }
+      }
+    }
+
+    .article-page {
+      text-align: right;
+    }
   }
 }

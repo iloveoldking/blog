@@ -6,7 +6,7 @@ module.exports = app => {
 
   const schemaConfig = {
     versionKey: false,
-    timestamps: true
+    timestamps: false
   }
 
   const schemaFields = {
@@ -14,16 +14,15 @@ module.exports = app => {
       type: Schema.ObjectId,
       ref: 'User'
     },
-    articleId: {
+    article: {
       type: Schema.ObjectId,
       ref: 'Article'
     },
-    content: {
-      type: String,
+    collectFlag: {
+      type: Boolean
     }
   }
 
-
-  const CommentSchema = new Schema(schemaFields, schemaConfig);
-  return mongoose.model('Comment', CommentSchema);
+  const CollectSchema = new Schema(schemaFields, schemaConfig);
+  return mongoose.model('Collect', CollectSchema);
 };

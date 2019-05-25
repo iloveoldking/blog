@@ -1,5 +1,6 @@
 import userConfig from '@/config'
 import router from '@/router'
+import Cookies from 'js-cookie'
 
 /**
  * @param {Array} arr1
@@ -142,37 +143,11 @@ export const isCorrect = (res) => {
 }
 
 /**
- * @description 退出登录，清空sessionStorage
+ * @description 退出登录，清空cookies
  */
 export const logout = () => {
-  sessionStorage.removeItem(userConfig.userInfoKey);
+  Cookies.remove(userConfig.userInfoKey);
   router.replace('/login')
-}
-
-/**
- * @description 设置sessionStorage
- */
-export const setSessionStorage = (item, value = null) => {
-  if (!value) {
-    sessionStorage.removeItem(item);
-  } else {
-    sessionStorage.setItem(item, JSON.stringify(value));
-  }
-}
-
-/**
- * @description 获取sessionStorage
- */
-export const getSessionStorage = (item) => {
-  if (!item) {
-    return false;
-  }
-  const sessionStr = sessionStorage.getItem(item);
-  if (sessionStr) {
-    return JSON.parse(sessionStr)
-  } else {
-    return false;
-  }
 }
 
 /**
@@ -184,4 +159,11 @@ export const getBase64 = (img, callback) => {
   const reader = new FileReader()
   reader.addEventListener('load', () => callback(reader.result))
   reader.readAsDataURL(img)
+}
+
+/**
+ * @description 获得cookies中的用户id
+ */
+export const getCookiesUserId = () => {
+  return Cookies.getJSON(userConfig.userInfoKey);
 }
