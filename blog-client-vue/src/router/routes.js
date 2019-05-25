@@ -11,7 +11,11 @@ export default [{
     children: [{
       path: '',
       name: 'articleList',
-      component: () => import('@/views/articleList/index')
+      component: () => import('@/views/articleList')
     }]
+  },
+  {
+    path: '/articleItem',
+    component: () => import('@/views/articleItem')
   }
 ]

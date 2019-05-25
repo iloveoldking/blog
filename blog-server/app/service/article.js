@@ -95,7 +95,9 @@ class ArticleService extends Service {
       sort: '-createdAt',
       lean: true,
     })
-    Article.populate(articles, {
+    // TODO 这里的关联查询偶尔不能生效，导致前台得不到用户信息
+    // 已经在关键查询时增加await操作，目前测试问题已经解决
+    await Article.populate(articles, {
       path: 'user',
       select: 'nickname photo'
     })
@@ -125,6 +127,10 @@ class ArticleService extends Service {
     if (!id) return paramsAbsenceError('id')
     try {
       const article = await ctx.model.Article.findById(id);
+      await ctx.model.Article.populate(article, {
+        path: 'user',
+        select: 'nickname photo'
+      })
       if (article) {
         return successResponse({
           data: article.toObject()

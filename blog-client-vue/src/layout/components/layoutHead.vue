@@ -6,7 +6,7 @@
         <a-button type="default" shape="circle" icon="form" class='add-article-btn' @click='showArticleDrawer'>
         </a-button>
         <a-dropdown :trigger="['click']">
-          <img v-if='userInfo.photo' class='user-photo' :src="userInfo.photo | photoAddress" alt="">
+          <img v-if='userInfo.photo' class='user-photo' :src="userInfo.photo | completeAddress" alt="">
           <a-avatar v-else class='user-photo'>{{userInfo.nickname | sliceOne}}
           </a-avatar>
           <a-menu slot="overlay">
@@ -19,7 +19,7 @@
       </div>
       <div v-show='!userInfo._id' class='login-register-group'>
         <a-button icon='user-add' @click="showRegisterModal">注册</a-button>
-        <a-button type="primary" icon='user' @click="showLoginModal">登录</a-button>
+        <a-button type="primary" icon='login' @click="showLoginModal">登录</a-button>
       </div>
     </div>
 
@@ -66,10 +66,12 @@
       })
     },
     methods: {
+      ...mapMutations('article', ['setPageNum']),
       ...mapActions('article', ['getArticleList', 'submitArticle']),
-      ...mapActions('user', ['login', 'register']),
       ...mapMutations('user', ['loginOut']),
+      ...mapActions('user', ['login', 'register']),
       onSearch(value, event) {
+        this.setPageNum(1);
         this.getArticleList({
           title: value
         });

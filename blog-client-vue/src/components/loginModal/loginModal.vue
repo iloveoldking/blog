@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import md5 from 'md5';
   export default {
     name: 'loginModal',
     props: ['loginLoading'],
@@ -58,6 +59,8 @@
       login() {
         this.form.validateFields((err, values) => {
           if (!err) {
+            // TODO 这里需要将密码采用md5加密
+            values.password = md5(values.password);
             this.$emit('loginSubmit', values);
           }
         });

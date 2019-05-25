@@ -1,6 +1,6 @@
 import userConfig from '@/config'
 
-const photoAddress = value => {
+const completeAddress = value => {
   return userConfig.baseURL + value;
 }
 
@@ -13,6 +13,6 @@ const sliceOne = value => {
 }
 
 export default {
-  photoAddress,
+  completeAddress,
   sliceOne
 }

@@ -2,6 +2,7 @@
   <a-locale-provider :locale="zh_CN">
     <div id="app">
       <router-view></router-view>
+      <a-back-top />
     </div>
   </a-locale-provider>
 </template>

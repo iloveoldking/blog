@@ -1,5 +1,5 @@
 <template>
-  <a-drawer title="发表文章" :width="720" @close="hide" :visible="visible" :closable='false'>
+  <a-drawer title="发表文章" :width="720" :visible="visible" :closable='false' :maskClosable='false'>
     <a-form :form="form" autocomplete='off' layout='vertical'>
       <a-form-item label="文章标题">
         <a-textarea v-decorator="titleDecorator" placeholder="文章标题" :autosize='{ minRows: 2}' />

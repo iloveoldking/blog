@@ -18,13 +18,14 @@
           <span>{{item.createdAt}}</span>
         </template>
         <a-list-item-meta>
-          <router-link slot="title" :to="'/articleDetail?id='+item._id">{{item.title}}</router-link>
-          <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | photoAddress" />
+          <router-link slot="title" :to="'/articleItem?id='+item._id">{{item.title}}</router-link>
+          <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | completeAddress" />
           <a-avatar v-else slot="avatar">{{item.user.nickname | sliceOne}}</a-avatar>
         </a-list-item-meta>
       </a-list-item>
     </a-list>
-    <!-- TODO 增加分页加载功能 -->
+    <a-divider v-if='total > 0' />
+    <a-pagination :total="total" :hideOnSinglePage='true' @change='pageChange' class='article-page' />
   </div>
 </template>
 
@@ -38,19 +39,26 @@
     name: 'articleList',
     data() {
       return {
-        
+
       }
     },
     computed: {
       ...mapState('article', {
-        dataList: state => state.dataList
+        dataList: state => state.dataList,
+        total: state => state.total
       })
     },
     created() {
+      this.setPageNum(1);
       this.getArticleList();
     },
     methods: {
-      ...mapActions('article', ['getArticleList'])
+      ...mapMutations('article', ['setPageNum']),
+      ...mapActions('article', ['getArticleList']),
+      pageChange(page, pageSize) {
+        this.setPageNum(page);
+        this.getArticleList();
+      }
     }
   }
 </script>

@@ -1,13 +1,11 @@
 <template>
   <a-layout class='blog-layout'>
     <layout-head></layout-head>
-
     <a-layout-content class='blog-layout-content'>
       <aside>
         <a-card hoverable>
           <a-calendar :fullscreen="false" slot="cover" />
           <template class="ant-card-actions" slot="actions">
-
             <div>
               <a-icon type="setting" spin style='margin-right:5px;'/>
               <span>{{currentTime}}</span>
@@ -19,8 +17,6 @@
         <router-view></router-view>
       </article>
     </a-layout-content>
-
-    <a-back-top />
   </a-layout>
 </template>
 

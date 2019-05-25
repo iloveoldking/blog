@@ -21,7 +21,7 @@ class UserService extends Service {
   /**
    * @description 新增用户
    * @param {*} mobile 手机号 唯一
-   * @param {*} password 密码 6-20位数字字母
+   * @param {*} password 密码
    * @param {*} nickname 昵称 唯一
    * @param {*} photo 头像
    */
@@ -32,9 +32,8 @@ class UserService extends Service {
     if (!mobile) return paramsAbsenceError('mobile');
     if (!password) return paramsAbsenceError('password');
     if (!nickname) return paramsAbsenceError('nickname');
-    // 检测手机号、密码、昵称是否符合格式
+    // 检测手机号、昵称是否符合格式
     if (!isCorrectMobile(mobile)) return paramsValueError('mobile');
-    if (!isCorrectPassword(password)) return paramsValueError('password');
     if (!/^[\u4e00-\u9fa5a-zA-Z0-9]{2,10}$/.test(nickname)) return paramsValueError('nickname');
     // 检测手机号和昵称是否唯一
     const mobileExist = await ctx.model.User.findOne({
@@ -101,7 +100,6 @@ class UserService extends Service {
     } = this;
     if (!userId) return paramsAbsenceError('userId')
     if (!password) return paramsAbsenceError('password')
-    if (!isCorrectPassword(password)) return paramsValueError('password');
     try {
       const res = await ctx.model.User.update({
         _id: userId
