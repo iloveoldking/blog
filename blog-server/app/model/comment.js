@@ -28,6 +28,9 @@ module.exports = app => {
       type: Schema.ObjectId,
       ref: 'Comment'
     },
+    replyAuthor: {
+      type: String,
+    },
     content: {
       type: String,
     }

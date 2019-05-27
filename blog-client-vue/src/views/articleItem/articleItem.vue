@@ -30,7 +30,8 @@
         </a-comment>
       </div>
       <!--评论列表 -->
-      <a-list class="comment-list" itemLayout="horizontal" :dataSource="commentData" :locale='{emptyText:"暂无任何评论"}'>
+      <a-list class="comment-list" size="small" itemLayout="horizontal" :dataSource="commentData"
+        :locale='{emptyText:"暂无任何评论"}'>
         <div slot="header" v-if='commentData.length > 0'>
           <a-icon type="message" style='margin-right:10px;' />{{commentData.length}}条评论</div>
         <a-list-item slot="renderItem" slot-scope="item, index">
@@ -38,7 +39,7 @@
             <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | completeAddress" alt="" />
             <a-avatar v-else slot="avatar">{{item.user.nickname | sliceOne}} </a-avatar>
             <template slot="actions" v-if='userInfo'>
-              <span @click='showReplyModal(item._id)'>回复</span>
+              <span @click='showReplyModal(item._id, item.user.nickname)'>回复</span>
             </template>
             <p slot="content" class='comment-content'>{{item.content}}</p>
             <span slot="datetime">{{index + 1}}楼
@@ -49,10 +50,10 @@
                 alt="" />
               <a-avatar v-else slot="avatar">{{replyItem.user.nickname | sliceOne}} </a-avatar>
               <template slot="actions" v-if='userInfo'>
-                <span @click='showReplyModal(replyItem.commentId)'>回复</span>
+                <span @click='showReplyModal(replyItem.commentId, replyItem.user.nickname)'>回复</span>
               </template>
               <p slot="content" class='comment-content'>{{replyItem.content}}</p>
-              <span slot="datetime">{{replyItem.createdAt}}</span>
+              <span slot="datetime">回复{{replyItem.replyAuthor}}<a-divider type="vertical" />{{replyItem.createdAt}}</span>
             </a-comment>
           </a-comment>
         </a-list-item>
@@ -108,7 +109,8 @@
           }
         ],
         replyLoading: false,
-        commentId: ''
+        commentId: '',
+        replyAuthor: ''
       }
     },
     computed: {
@@ -165,16 +167,18 @@
           }
         });
       },
-      showReplyModal(commentId) {
+      showReplyModal(commentId, replyAuthor) {
         this.$refs['reply-modal'].show();
         this.commentId = commentId;
+        this.replyAuthor = replyAuthor;
       },
       async replySubmit(values) {
         this.replyLoading = true;
         const res = await commentArticle({
           ...values,
           userId: this.userInfo._id,
-          commentId: this.commentId
+          commentId: this.commentId,
+          replyAuthor: this.replyAuthor
         });
         this.replyLoading = false;
         if (isCorrect(res)) {
