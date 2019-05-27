@@ -3,7 +3,7 @@
     <!-- 文章内容 -->
     <a-card :title="title" :bordered='false'>
       <div slot="extra">
-        <span>{{user.createdAt}}</span>
+        <span>{{createdAt}}</span>
         <a-divider type="vertical" />
         <span>{{user.nickname}}</span>
       </div>
@@ -20,7 +20,7 @@
           <div slot="content">
             <a-form :form="form">
               <a-form-item>
-                <a-textarea :rows="2" v-decorator="commentDecorator"></a-textarea>
+                <a-textarea :autosize="{minRows: 2}" v-decorator="commentDecorator"></a-textarea>
               </a-form-item>
               <a-form-item class='submit-form-item'>
                 <a-button :loading="submitting" @click="handleSubmit" type="primary">发表评论</a-button>
@@ -38,15 +38,28 @@
             <a-avatar v-if='item.user.photo' slot="avatar" :src="item.user.photo | completeAddress" alt="" />
             <a-avatar v-else slot="avatar">{{item.user.nickname | sliceOne}} </a-avatar>
             <template slot="actions" v-if='userInfo'>
-              <span>回复</span>
+              <span @click='showReplyModal(item._id)'>回复</span>
             </template>
-            <p slot="content">{{item.content}}</p>
+            <p slot="content" class='comment-content'>{{item.content}}</p>
             <span slot="datetime">{{index + 1}}楼
               <a-divider type="vertical" />{{item.createdAt}}</span>
+            <!-- 回复列表 -->
+            <a-comment :author="replyItem.user.nickname" v-for="replyItem in item.reply" :key='replyItem._id'>
+              <a-avatar v-if='replyItem.user.photo' slot="avatar" :src="replyItem.user.photo | completeAddress"
+                alt="" />
+              <a-avatar v-else slot="avatar">{{replyItem.user.nickname | sliceOne}} </a-avatar>
+              <template slot="actions" v-if='userInfo'>
+                <span @click='showReplyModal(replyItem.commentId)'>回复</span>
+              </template>
+              <p slot="content" class='comment-content'>{{replyItem.content}}</p>
+              <span slot="datetime">{{replyItem.createdAt}}</span>
+            </a-comment>
           </a-comment>
         </a-list-item>
       </a-list>
     </div>
+    <!-- 回复弹框 -->
+    <reply-modal ref='reply-modal' @replySubmit='replySubmit' :loginLoading='replyLoading' />
   </div>
 </template>
 
@@ -67,8 +80,12 @@
   import {
     scrollIntoView
   } from 'scroll-js';
+  import replyModal from '@/components/replyModal'
   export default {
     name: 'articleItem',
+    components: {
+      replyModal
+    },
     data() {
       return {
         title: '',
@@ -89,7 +106,9 @@
               message: '请输入评论内容'
             }]
           }
-        ]
+        ],
+        replyLoading: false,
+        commentId: ''
       }
     },
     computed: {
@@ -145,7 +164,26 @@
             }
           }
         });
-
+      },
+      showReplyModal(commentId) {
+        this.$refs['reply-modal'].show();
+        this.commentId = commentId;
+      },
+      async replySubmit(values) {
+        this.replyLoading = true;
+        const res = await commentArticle({
+          ...values,
+          userId: this.userInfo._id,
+          commentId: this.commentId
+        });
+        this.replyLoading = false;
+        if (isCorrect(res)) {
+          this.$message.success('发表成功')
+          this.$refs['reply-modal'].hide();
+          await this.getItem();
+        } else {
+          this.$message.error('发表失败');
+        }
       }
     },
   }

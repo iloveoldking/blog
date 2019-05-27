@@ -25,4 +25,5 @@ module.exports = app => {
 
   // 上传文件
   router.post('/upload',controller.upload.index);
+  router.post('/editorUpload',controller.editorUpload.index);
 };

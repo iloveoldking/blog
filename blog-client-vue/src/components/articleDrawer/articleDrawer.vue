@@ -1,11 +1,11 @@
 <template>
-  <a-drawer title="发表文章" :width="720" :visible="visible" :closable='false' :maskClosable='false'>
+  <a-drawer title="发表文章" width="60vw" :visible="visible" :closable='false' :maskClosable='false' :destroyOnClose='true'>
     <a-form :form="form" autocomplete='off' layout='vertical'>
       <a-form-item label="文章标题">
         <a-textarea v-decorator="titleDecorator" placeholder="文章标题" :autosize='{ minRows: 2}' />
       </a-form-item>
       <a-form-item label="文章内容">
-        <a-textarea v-decorator="contentDecorator" placeholder="文章内容" :autosize='{ minRows: 6}' />
+        <ck-editor v-decorator="contentDecorator" />
       </a-form-item>
     </a-form>
     <div class='bottom-button-group'>
@@ -15,9 +15,13 @@
   </a-drawer>
 </template>
 <script>
+  import ckEditor from '@/components/ckEditor'
   export default {
     name: 'articleDrawer',
     props: ['articleLoading'],
+    components: {
+      ckEditor
+    },
     data() {
       return {
         form: this.$form.createForm(this),
@@ -53,7 +57,6 @@
       },
       hide() {
         this.visible = false;
-        this.form.resetFields();
       },
       submit() {
         this.form.validateFields((err, values) => {

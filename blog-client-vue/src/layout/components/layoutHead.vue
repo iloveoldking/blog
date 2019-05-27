@@ -3,12 +3,14 @@
     <div class='layout-head-row'>
       <div v-if='userInfo'>
         <a-dropdown :trigger="['click']">
-          <a-avatar v-if='userInfo.photo' class='user-photo' :src='userInfo.photo | completeAddress' />
-          <a-avatar v-else class='user-photo'>{{userInfo.nickname | sliceOne}}</a-avatar>
+          <a-badge dot :count="5">
+            <a-avatar v-if='userInfo.photo' class='user-photo' :src='userInfo.photo | completeAddress' />
+            <a-avatar v-else class='user-photo'>{{userInfo.nickname | sliceOne}}</a-avatar>
+          </a-badge>
           <a-menu slot="overlay">
             <a-menu-item>{{userInfo.nickname}}</a-menu-item>
             <a-menu-divider />
-            <a-menu-item>个人中心</a-menu-item>
+            <a-menu-item>个人中心<a-badge dot :count="5" /></a-menu-item>
             <a-menu-item @click='handleLoginOut'>退出登录</a-menu-item>
           </a-menu>
         </a-dropdown>

@@ -86,9 +86,10 @@ class ArticleController extends Controller {
     const {
       userId,
       articleId,
+      commentId,
       content
     } = ctx.request.body;
-    const res = await ctx.service.article.comment(userId, articleId, content);
+    const res = await ctx.service.article.comment(userId, articleId, commentId, content);
     ctx.body = res;
   }
 }

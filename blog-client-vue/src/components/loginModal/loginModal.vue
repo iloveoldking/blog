@@ -26,7 +26,6 @@
     data() {
       return {
         visible: false,
-        formLayout: 'horizontal',
         form: this.$form.createForm(this),
         mobileDecorator: [
           'mobile',

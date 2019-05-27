@@ -164,7 +164,6 @@ class ArticleService extends Service {
         path: 'user',
         select: 'nickname photo'
       })
-      // TODO 查询一片文章是否被当前用户收藏或者点赞，这里可以抽取出来做一个公用方法
       if (article) {
         let resData = article.toObject()
         const collectCount = await ctx.model.Collect.countDocuments({
@@ -207,9 +206,24 @@ class ArticleService extends Service {
           path: 'user',
           select: 'nickname photo'
         })
-        commentArray.forEach(item => {
-          item.createdAt = moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss')
-        })
+        for (let i = 0; i < commentArray.length; i++) {
+          let item = commentArray[i];
+          item.createdAt = moment(item.createdAt).format('YYYY-MM-DD HH:mm:ss');
+          const reply = await ctx.model.Comment.find({
+            commentId: item._id
+          }, null, {
+            sort: 'createdAt',
+            lean: true,
+          })
+          await ctx.model.Comment.populate(reply, {
+            path: 'user',
+            select: 'nickname photo'
+          })
+          reply.forEach(replyItem => {
+            replyItem.createdAt = moment(replyItem.createdAt).format('YYYY-MM-DD HH:mm:ss');
+          })
+          item.reply = reply;
+        }
         resData = {
           ...resData,
           commentArray
@@ -318,19 +332,21 @@ class ArticleService extends Service {
    * @description 评论文章
    * @param {String} userId 用户id
    * @param {String} articleId 文章id
+   * @param {String} commentId 评论id
    * @param {Boolean} content 评论内容
    */
-  async comment(userId, articleId, content) {
+  async comment(userId, articleId, commentId, content) {
     const {
       ctx,
     } = this;
     if (!userId) return paramsAbsenceError('userId');
-    if (!articleId) return paramsAbsenceError('articleId');
+    if (!articleId && !commentId) return paramsAbsenceError('articleId || commentId');
     if (!content) return paramsAbsenceError('content');
     try {
       await ctx.model.Comment.create({
         user: userId,
         articleId,
+        commentId,
         content
       })
       return successResponse()
