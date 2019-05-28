@@ -5,7 +5,12 @@ export default [
     routes: [
       {
         path: '/user',
-        component: './Welcome',
+        redirect: '/user/login',
+      },
+      {
+        path: '/user/login',
+        name: 'login',
+        component: './User/Login',
       },
     ],
   },

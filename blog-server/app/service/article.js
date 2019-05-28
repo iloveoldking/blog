@@ -1,5 +1,3 @@
-// TODO 文章支持付文本编辑，接口筛选出文本中的图片用作前台展示
-
 const Service = require('egg').Service;
 const moment = require('moment')
 const {
