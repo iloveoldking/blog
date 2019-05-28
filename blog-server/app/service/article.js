@@ -335,7 +335,7 @@ class ArticleService extends Service {
    * @param {String} commentId 评论id
    * @param {Boolean} content 评论内容
    */
-  async comment(userId, articleId, commentId, replyAuthor, content) {
+  async comment(userId, articleId, commentId, commentAuthor, content) {
     const {
       ctx,
     } = this;
@@ -347,7 +347,7 @@ class ArticleService extends Service {
         user: userId,
         articleId,
         commentId,
-        replyAuthor,
+        commentAuthor,
         content
       })
       return successResponse()

@@ -53,7 +53,7 @@
                 <span @click='showReplyModal(replyItem.commentId, replyItem.user.nickname)'>回复</span>
               </template>
               <p slot="content" class='comment-content'>{{replyItem.content}}</p>
-              <span slot="datetime">回复{{replyItem.replyAuthor}}<a-divider type="vertical" />{{replyItem.createdAt}}</span>
+              <span slot="datetime">回复{{replyItem.commentAuthor}}<a-divider type="vertical" />{{replyItem.createdAt}}</span>
             </a-comment>
           </a-comment>
         </a-list-item>
@@ -110,7 +110,7 @@
         ],
         replyLoading: false,
         commentId: '',
-        replyAuthor: ''
+        commentAuthor: ''
       }
     },
     computed: {
@@ -167,10 +167,10 @@
           }
         });
       },
-      showReplyModal(commentId, replyAuthor) {
+      showReplyModal(commentId, commentAuthor) {
         this.$refs['reply-modal'].show();
         this.commentId = commentId;
-        this.replyAuthor = replyAuthor;
+        this.commentAuthor = commentAuthor;
       },
       async replySubmit(values) {
         this.replyLoading = true;
@@ -178,7 +178,7 @@
           ...values,
           userId: this.userInfo._id,
           commentId: this.commentId,
-          replyAuthor: this.replyAuthor
+          commentAuthor: this.commentAuthor
         });
         this.replyLoading = false;
         if (isCorrect(res)) {
