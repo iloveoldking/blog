@@ -1,0 +1,48 @@
+.h100pAuto {
+  height: 100%;
+  overflow: auto;
+}
+
+.h100pHidden {
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  .h100pHidden;
+  background: #f8f8f8;
+
+  header {
+    height: 64px;
+    background: #333;
+    color: #fff;
+    text-align: right;
+    padding: 16px 30px;
+
+    .nickname {
+      cursor: pointer;
+      line-height: 32px;
+    }
+  }
+
+  .main {
+    height: calc(100% - 64px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    aside {
+      width: 200px;
+      background: #fff;
+      .h100pAuto;
+    }
+
+    article {
+      flex: 1;
+      .h100pAuto;
+      padding: 15px;
+    }
+  }
+}

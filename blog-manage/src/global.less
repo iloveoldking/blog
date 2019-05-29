@@ -1,19 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
   height: 100%;
-}
-
-.colorWeak {
-  filter: invert(80%);
-}
-
-.ant-layout {
-  min-height: 100vh;
-}
-
-canvas {
-  display: block;
 }
 
 body {
@@ -22,12 +16,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.globalSpin {
-  width: 100%;
-  margin: 40px 0 !important;
-}
-
 ul,
 ol {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+// 浏览器滚动条样式，只在chrome上生效
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: #666;
 }

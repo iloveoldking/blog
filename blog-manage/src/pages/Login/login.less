@@ -1,0 +1,24 @@
+@import '../../utils/utils.less';
+
+.container {
+  height: 100%;
+  background-color: #fafafa;
+  background-image: url(../../assets/images/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loginCard {
+    width: 360px;
+
+    :global {
+      .ant-card-body {
+        padding: 30px 30px;
+      }
+    }
+  }
+}
