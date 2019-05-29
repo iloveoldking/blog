@@ -9,9 +9,18 @@ export default [{
   {
     path: '/',
     component: '../layouts/Basic',
+    Routes: ['src/pages/Authorized'],
     routes: [{
+      path: '/',
+      redirect: '/user'
+    }, {
       path: '/user',
+      name: 'user',
       component: './User'
+    }, {
+      path: '/article',
+      name: 'article',
+      component: './Article'
     }]
   }
 ]

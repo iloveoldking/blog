@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'dva';
 
-@connect(({ user }) => ({
-  user
+@connect(({ article }) => ({
+  article
 }))
 class User extends Component {
   render() {
-    const name = this.props.user.name;
+    const name = this.props.article.name;
     return (
       <div>
-        this is user page{name}
+        this is article page{name}
       </div>
     )
   }

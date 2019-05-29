@@ -7,7 +7,7 @@ export default {
   namespace: 'article',
 
   state: {
-    name:'zhanshan'
+    name:'lisi'
   },
 
   effects: {
