@@ -2,9 +2,12 @@ import axios from 'axios'
 import {
   notification
 } from 'antd'
+import {
+  baseUrl
+} from '../defaultSettings'
 
 let instance = axios.create({
-  baseURL: 'http://192.168.31.41:7001',
+  baseURL: baseUrl,
   timeout: 1000 * 10,
   headers: {
     'Accept': "application/json; charset=utf-8",

@@ -126,3 +126,14 @@ export class Authorized extends Component {
 
 export default Authorized;
 ```
+### umi国际化处理
+>在config/config.js/plugins中配置
+```
+locale: {
+  default: 'zh-CN', //默认语言 zh-CN
+  baseNavigator: true, // 为true时，用navigator.language的值作为默认语言
+  antd: true // 是否启用antd的<LocaleProvider />
+}
+```
+### 分页器和表格数据分页的关系
+>分页器的current和pageSize可以存储在modules中，作为分页器的展示数据，只是为了控制分页器显示，不涉及业务逻辑，表格数据分页翻页后要把modules中的分页器更新，并且请求新的数据

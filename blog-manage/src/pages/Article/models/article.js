@@ -1,8 +1,3 @@
-import router from 'umi/router';
-import {
-  message
-} from 'antd';
-
 export default {
   namespace: 'article',
 

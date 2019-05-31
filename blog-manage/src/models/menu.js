@@ -1,9 +1,3 @@
-import router from 'umi/router';
-import Cookies from 'js-cookie';
-import {
-  message
-} from 'antd';
-
 export default {
   namespace: 'menu',
 
