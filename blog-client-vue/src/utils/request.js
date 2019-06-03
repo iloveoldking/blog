@@ -20,26 +20,20 @@ instance.interceptors.request.use(function (config) {
 }, function (error) {
   // 对请求错误做些什么
   notification.error({
-    message: '前端错误',
-    description: '发送请求之前，前端出现错误' + error
+    message: '发送请求之前，请求错误',
+    description: error.message
   });
 });
 
 // 添加响应拦截器
 instance.interceptors.response.use(function (res) {
   // 对响应数据做点什么
-  if (res.status === 200) {
-    return res.data;
-  }
-  notification.error({
-    message: '响应错误',
-    description: '响应错误，浏览器返回状态码异常' + res.status
-  });
+  return res.data;
 }, function (error) {
   // 对响应错误做点什么
   notification.error({
-    message: '响应错误',
-    description: '发送请求之后，响应出现错误' + error
+    message: '发送请求之后，响应错误',
+    description: error.message
   });
 });
 

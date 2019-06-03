@@ -9,7 +9,12 @@ export default {
       dynamicImport: {
         webpackChunkName: true
       },
-      title: '博客管理后台',
+      title: {
+        defaultTitle: '博客管理后台',
+        format: '{parent}{separator}{current}',
+        separator: ' - ',
+        useLocale: false
+      },
       dll: false,
       locale: {
         default: 'zh-CN', //默认语言 zh-CN
