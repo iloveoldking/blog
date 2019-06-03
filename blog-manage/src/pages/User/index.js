@@ -4,7 +4,7 @@ import { Button, Modal } from 'antd'
 import styles from './user.less';
 import SearchFrom from './SearchForm'
 import CreateModal from './CreateModal'
-import DateTable from './DateTable'
+import DataTable from './DataTable'
 
 const confirm = Modal.confirm;
 
@@ -72,14 +72,7 @@ class User extends Component {
   }
 
   tableChange = pageParams => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'user/setPagination',
-      payload: {
-        current: pageParams.pageNum,
-        pageSize: pageParams.pageSize,
-      }
-    })
+    this.setPagination(pageParams.pageNum, pageParams.pageSize);
     const { searchFormValue } = this.state;
     const params = {
       ...pageParams,
@@ -171,10 +164,10 @@ class User extends Component {
 
         <div className={styles.toolbar}>
           <Button type='primary' icon='plus' onClick={this.showCreateModal}>新增</Button>
-          {selectedRowKeys.length > 0 ? <Button type='danger' icon='delete' onClick={this.handleDelete}>删除</Button> : null}
+          {selectedRowKeys.length > 0 ? <Button type='danger' icon='delete' onClick={this.handleDelete}>批量删除</Button> : null}
         </div>
 
-        <DateTable dataSource={list} total={total} current={current} pageSize={pageSize} tableChange={this.tableChange} selectChange={this.selectChange} userDelete={this.userDelete} />
+        <DataTable dataSource={list} total={total} current={current} pageSize={pageSize} tableChange={this.tableChange} selectChange={this.selectChange} userDelete={this.userDelete} />
 
         <CreateModal createModalVisible={createModalVisible} hideCreateModal={this.hideCreateModal} handleCreateOk={this.handleCreateOk} />
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Input, Button } from 'antd';
-
+// TODO 增加文章作者姓名模糊查询
 @Form.create()
 class SearchForm extends Component {
   handleSubmit = () => {
@@ -19,10 +19,7 @@ class SearchForm extends Component {
     return (
       <Form layout="inline" autoComplete='off'>
         <Form.Item>
-          {getFieldDecorator('mobile')(<Input placeholder="手机号" />)}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('nickname')(<Input placeholder="昵称" />)}
+          {getFieldDecorator('title')(<Input placeholder="文章标题" />)}
         </Form.Item>
         <Form.Item>
           <Button type="primary" style={{ marginRight: '8px' }} onClick={this.handleSubmit}>查询</Button>
