@@ -8,7 +8,7 @@ class EditorUploadController extends Controller {
     } = this;
     const uploadRes = await upload(this);
     ctx.body = {
-      url: `http://192.168.31.41:7001${uploadRes.path}`,
+      url: `http://47.107.55.244:7001${uploadRes.path}`,
       uploaded: true
     };
   }
