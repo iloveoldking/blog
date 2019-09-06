@@ -15,18 +15,23 @@ export default [{
     Routes: ['src/pages/Authorized'],
     title: '博客管理后台',
     routes: [{
-      path: '/',
-      redirect: '/user'
-    }, {
-      path: '/user',
-      name: 'user',
-      title: '用户管理',
-      component: './User'
-    }, {
-      path: '/article',
-      name: 'article',
-      title: '文章管理',
-      component: './Article'
-    }]
+        path: '/',
+        redirect: '/plat/user'
+      },
+      {
+        path: '/plat',
+        routes: [{
+          path: '/plat/user',
+          name: 'user',
+          title: '用户管理',
+          component: './User'
+        }, {
+          path: '/plat/article',
+          name: 'article',
+          title: '文章管理',
+          component: './Article'
+        }]
+      }
+    ]
   }
 ]
