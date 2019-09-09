@@ -26,19 +26,32 @@ const NavMenu = props => {
       >
         <Menu.Item key="user"><Link to="/plat/user">用户管理</Link></Menu.Item>
         <Menu.Item key="article"><Link to="/plat/article">文章管理</Link></Menu.Item>
+
+        <SubMenu
+          key="plat2"
+          title={
+            <span>
+              <Icon type="setting" />
+              <span>平台管理</span>
+            </span>
+          }
+        >
+          <Menu.Item key="user2"><Link to="/plat/plat2/user2">用户管理</Link></Menu.Item>
+          <Menu.Item key="article2"><Link to="/plat/plat2/article2">文章管理</Link></Menu.Item>
+        </SubMenu>
       </SubMenu>
       <SubMenu
-        key="plat2"
-        title={
-          <span>
-            <Icon type="setting" />
-            <span>平台管理</span>
-          </span>
-        }
-      >
-        <Menu.Item key="user2"><Link to="/plat2/user2">用户管理</Link></Menu.Item>
-        <Menu.Item key="article2"><Link to="/plat2/article2">文章管理</Link></Menu.Item>
-      </SubMenu>
+          key="plat3"
+          title={
+            <span>
+              <Icon type="setting" />
+              <span>平台管理</span>
+            </span>
+          }
+        >
+          <Menu.Item key="user3"><Link to="/plat3/user3">用户管理</Link></Menu.Item>
+          <Menu.Item key="article3"><Link to="/plat3/article3">文章管理</Link></Menu.Item>
+        </SubMenu>
     </Menu>
   )
 }

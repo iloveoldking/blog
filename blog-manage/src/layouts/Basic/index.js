@@ -7,10 +7,13 @@ import styles from './basicLayout.less';
 import NavMenu from './NavMenu';
 import { getDefaultOpenKeys, getDefaultSelectedKeys } from './SiderMenuUtils';
 
+const rootMenu = ['plat', 'plat3']
+
 @connect(({ global }) => ({
   global
 }))
 class BasicLayout extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,9 +27,15 @@ class BasicLayout extends Component {
   }
 
   handleOpenChange = openKeys => {
-    this.setState({
-      openKeys: [openKeys.pop()]
-    })
+    const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
+    if (rootMenu.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys });
+    } else {
+      console.log(latestOpenKey);
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : [],
+      });
+    }
   };
 
   render() {

@@ -26,7 +26,7 @@ export default {
           type: 'setUser',
           payload: response.data,
         });
-        router.push('/user');
+        router.push('/');
       } else {
         message.error(response.msg);
       }
